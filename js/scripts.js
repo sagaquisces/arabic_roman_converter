@@ -119,6 +119,8 @@ var convert = function (s) {
 	} else {
 		romanToArabic(s);
 	}
+
+
 };
 
 //alert (arabicToRoman(111));
@@ -135,10 +137,14 @@ $(document).ready(function() {
     var inputtedString = $("input#string").val();
 
 		var result = convert(inputtedString);
+		alert(outputArabic + " " + outputRoman);
 
-		alert (result);
+		$(".inputRomanNumeral").text(inputtedString);
+		$(".inputArabicNumber").text(inputtedString);
+    $(".outputArabicNumber").text(outputArabic);
+    $(".outputRomanNumeral").text(outputRoman);
 
-    $(".arabicNumber").text(outputArabic);
-    $(".romanNumberal").text(outPutRoman);
+		$("#romanToArabic").show;
+		$("#arabicToRoman").show;
   });
 });
