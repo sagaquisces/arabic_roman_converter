@@ -1,10 +1,10 @@
 var roman = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"];
 var arabic = [1000,900,500,   400, 100,  90,  50,  40,   10,   9,    5,   4,    1];
-
 var outputRoman="";
 var outputArabic=0;
 
 var arabicToRoman = function(n) {
+	var outputRoman="";
 	for (var i=0;i<roman.length;i++) {
   	if (n>=arabic[i]) {
     	outputRoman += roman[i];
@@ -17,6 +17,7 @@ var arabicToRoman = function(n) {
 };
 
 var romanToArabic = function(l) {
+	var outputArabic=0;
 	for (i=0;l.charAt(i)==="M";i++){ //check for multiples of 1000
   	outputArabic += 1000;
     alert("i=" + i);
@@ -115,10 +116,11 @@ var romanToArabic = function(l) {
 
 var convert = function (s) {
   if ($.isNumeric(s)) {
-		arabicToRoman(s);
+		var result = arabicToRoman(s);
 	} else {
-		romanToArabic(s);
+		var result = romanToArabic(s);
 	}
+	return result;
 
 
 };
@@ -132,19 +134,22 @@ $(document).ready(function() {
   $("form").submit(function(event) {
     event.preventDefault();
 
-		alert ("here");
-
     var inputtedString = $("input#string").val();
 
 		var result = convert(inputtedString);
-		alert(outputArabic + " " + outputRoman);
 
-		$(".inputRomanNumeral").text(inputtedString);
-		$(".inputArabicNumber").text(inputtedString);
-    $(".outputArabicNumber").text(outputArabic);
-    $(".outputRomanNumeral").text(outputRoman);
+		alert ("result: " +result);
 
-		$("#romanToArabic").show;
-		$("#arabicToRoman").show;
+		if ($.isNumeric(result)) {
+			$(".inputRomanNumeral").text(inputtedString);
+			$(".outputArabicNumber").text(result);
+			$("#arabicToRoman").hide();
+			$("#romanToArabic").show();
+		} else {
+			$(".inputArabicNumber").text(inputtedString);
+			$(".outputRomanNumeral").text(result);
+			$("#romanToArabic").hide()
+			$("#arabicToRoman").show();
+		}
   });
 });
